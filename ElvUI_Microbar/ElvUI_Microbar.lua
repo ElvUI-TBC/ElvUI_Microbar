@@ -21,7 +21,7 @@ local E, L, V, P, G, _ =  unpack(ElvUI);
 local AB = E:GetModule("ActionBars");
 local EP = LibStub("LibElvUIPlugin-1.0")
 local S = E:GetModule("Skins")
-local addon = ...
+local addon = "ElvUI_MicroBar"
 local UB
 
 P.actionbar.microbar.scale = 1
@@ -34,11 +34,9 @@ local MICRO_BUTTONS = {
 	"CharacterMicroButton",
 	"SpellbookMicroButton",
 	"TalentMicroButton",
-	"AchievementMicroButton",
 	"QuestLogMicroButton",
 	"SocialsMicroButton",
-	"PVPMicroButton",
-	"LFDMicroButton",
+	"LFGMicroButton",
 	"MainMenuMicroButton",
 	"HelpMicroButton"
 };
@@ -172,14 +170,14 @@ function AB:SetupSymbolBar()
 	frame:SetScript("OnEnter", Letter_OnEnter);
 	frame:SetScript("OnLeave", Letter_OnLeave);
 
-	AB:CreateSymbolButton("EMB_Character", "C", MicroButtonTooltipText(CHARACTER_INFO, "TOGGLECHARACTER0"), function() 
+	AB:CreateSymbolButton("EMB_Character", "C", MicroButtonTooltipText(CHARACTER_INFO, "TOGGLECHARACTER0"), function()
 		if(CharacterFrame:IsShown()) then
 			HideUIPanel(CharacterFrame);
 		else
 			ShowUIPanel(CharacterFrame);
 		end
 	end);
-	AB:CreateSymbolButton("EMB_Spellbook", "S", MicroButtonTooltipText(SPELLBOOK_ABILITIES_BUTTON, "TOGGLESPELLBOOK"), function() 
+	AB:CreateSymbolButton("EMB_Spellbook", "S", MicroButtonTooltipText(SPELLBOOK_ABILITIES_BUTTON, "TOGGLESPELLBOOK"), function()
 		if(SpellBookFrame:IsShown()) then
 			HideUIPanel(SpellBookFrame);
 		else
@@ -200,7 +198,6 @@ function AB:SetupSymbolBar()
 			end
 		end
 	end)
-	AB:CreateSymbolButton("EMB_Achievement", "A", MicroButtonTooltipText(ACHIEVEMENT_BUTTON, "TOGGLEACHIEVEMENT"), function() ToggleAchievementFrame(); end);
 	AB:CreateSymbolButton("EMB_Quest", "Q", MicroButtonTooltipText(QUESTLOG_BUTTON, "TOGGLEQUESTLOG"), function()
 		if(QuestLogFrame:IsShown()) then
 			HideUIPanel(QuestLogFrame);
@@ -209,8 +206,7 @@ function AB:SetupSymbolBar()
 		end
 	end);
 	AB:CreateSymbolButton("EMB_Socials", "F", MicroButtonTooltipText(SOCIAL_BUTTON, "TOGGLESOCIAL"), function() ToggleFriendsFrame(); end);
-	AB:CreateSymbolButton("EMB_PVP", "P", MicroButtonTooltipText(PLAYER_V_PLAYER, "TOGGLECHARACTER4"), function() TogglePVPFrame(); end)
-	AB:CreateSymbolButton("EMB_LFD", "D", MicroButtonTooltipText(DUNGEONS_BUTTON, "TOGGLELFGPARENT"), function() ToggleLFDParentFrame(); end);
+	AB:CreateSymbolButton("EMB_LFG", "D", MicroButtonTooltipText(L["Dungeons"], "TOGGLELFGPARENT"), function() ToggleLFGParentFrame(); end);
 	AB:CreateSymbolButton("EMB_MenuSys", "M", MicroButtonTooltipText(MAINMENU_BUTTON, "TOGGLEGAMEMENU"), function()
 		if(GameMenuFrame:IsShown()) then
 			PlaySound("igMainMenuQuit");
@@ -238,7 +234,7 @@ function AB:UpdateMicroPositionDimensions()
 		if(prevButton == ElvUI_MicroBar) then
 			button:SetPoint("TOPLEFT", prevButton, "TOPLEFT", -2 + E.Border, 28 - E.Border);
 		elseif((i - 1) % self.db.microbar.buttonsPerRow == 0) then
-			button:Point("TOP", lastColumnButton, "BOTTOM", 0, 28 - self.db.microbar.yOffset);	
+			button:Point("TOP", lastColumnButton, "BOTTOM", 0, 28 - self.db.microbar.yOffset);
 			numRows = numRows + 1;
 		else
 			button:Point("LEFT", prevButton, "RIGHT", - 4 + self.db.microbar.xOffset, 0);
@@ -281,7 +277,7 @@ function AB:UpdateMicroPositionDimensions()
 		if(prevButton == ElvUI_MicroBarS) then
 			button:SetPoint("TOPLEFT", prevButton, "TOPLEFT", E.Border, -E.Border);
 		elseif((i - 1) % self.db.microbar.buttonsPerRow == 0) then
-			button:Point("TOP", lastColumnButton, "BOTTOM", 0, -self.db.microbar.yOffset);	
+			button:Point("TOP", lastColumnButton, "BOTTOM", 0, -self.db.microbar.yOffset);
 			numRowsS = numRowsS + 1;
 		else
 			button:Point("LEFT", prevButton, "RIGHT", self.db.microbar.xOffset, 0);
