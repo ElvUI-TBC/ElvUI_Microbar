@@ -206,7 +206,7 @@ function AB:SetupSymbolBar()
 		end
 	end);
 	AB:CreateSymbolButton("EMB_Socials", "F", MicroButtonTooltipText(SOCIAL_BUTTON, "TOGGLESOCIAL"), function() ToggleFriendsFrame(); end);
-	AB:CreateSymbolButton("EMB_LFG", "D", MicroButtonTooltipText(L["Dungeons"], "TOGGLELFGPARENT"), function() ToggleLFGParentFrame(); end);
+	AB:CreateSymbolButton("EMB_LFG", "D", MicroButtonTooltipText(L["Looking For Group/Looking For More"], "TOGGLELFGPARENT"), function() ToggleLFGParentFrame(); end);
 	AB:CreateSymbolButton("EMB_MenuSys", "M", MicroButtonTooltipText(MAINMENU_BUTTON, "TOGGLEGAMEMENU"), function()
 		if(GameMenuFrame:IsShown()) then
 			PlaySound("igMainMenuQuit");
