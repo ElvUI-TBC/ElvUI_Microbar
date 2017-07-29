@@ -5,6 +5,9 @@ local S = E:GetModule("Skins")
 local addon = "ElvUI_MicroBar"
 local UB
 
+local LFG_TITLE = LFG_TITLE
+local LFM_TITLE = LFM_TITLE
+
 P.actionbar.microbar.scale = 1
 P.actionbar.microbar.symbolic = false
 P.actionbar.microbar.backdrop = false
