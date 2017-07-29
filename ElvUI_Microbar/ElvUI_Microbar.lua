@@ -1,23 +1,4 @@
-﻿-------------------------------------------------
---
--- ElvUI Microbar Enhancement by Darth Predator
--- Дартпредатор - Вечная Песня (Eversong) RU
---
--------------------------------------------------
---
--- Thanks to / Благодарности:
--- Elv and ElvUI community
--- Blazeflack for helping with option storage and profile changing
---
--------------------------------------------------
---
--- Usage / Использование:
--- Just install and configure for yourself
--- Устанавливаем, настраиваем и получаем профит
---
--------------------------------------------------
-
-local E, L, V, P, G =  unpack(ElvUI)
+﻿local E, L, V, P, G =  unpack(ElvUI)
 local AB = E:GetModule("ActionBars")
 local EP = LibStub("LibElvUIPlugin-1.0")
 local S = E:GetModule("Skins")
