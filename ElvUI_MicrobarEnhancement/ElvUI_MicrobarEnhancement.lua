@@ -15,7 +15,47 @@ P.actionbar.microbar.colorS = {r = 1, g = 1, b = 1}
 
 MicroButtonPortrait:SetDrawLayer("ARTWORK")
 
+local function ColorizeSettingName(settingName)
+	return format("|cff1784d1%s|r", settingName)
+end
+
 function AB:GetOptions()
+	if not E.Options.args.elvuiPlugins then
+		E.Options.args.elvuiPlugins = {
+			order = 50,
+			type = "group",
+			name = "|cff00b30bE|r|cffC4C4C4lvUI_|r|cff00b30bP|r|cffC4C4C4lugins|r",
+			args = {
+				header = {
+					order = 0,
+					type = "header",
+					name = "|cff00b30bE|r|cffC4C4C4lvUI_|r|cff00b30bP|r|cffC4C4C4lugins|r"
+				},
+				microbarEnhancedShortcut = {
+					type = "execute",
+					name = ColorizeSettingName("Microbar Enhancement"),
+					func = function()
+						if IsAddOnLoaded("ElvUI_Config") then
+							local ACD = LibStub("AceConfigDialog-3.0-ElvUI")
+							ACD:SelectGroup("ElvUI", "actionbar", "microbarEnhanced")
+						end
+					end
+				}
+			}
+		}
+	elseif not E.Options.args.elvuiPlugins.args.microbarEnhancedShortcut then
+		E.Options.args.elvuiPlugins.args.microbarEnhancedShortcut = {
+			type = "execute",
+			name = ColorizeSettingName("Microbar Enhancement"),
+			func = function()
+				if IsAddOnLoaded("ElvUI_Config") then
+					local ACD = LibStub("AceConfigDialog-3.0-ElvUI")
+					ACD:SelectGroup("ElvUI", "actionbar", "microbar")
+				end
+			end
+		}
+	end
+
 	E.Options.args.actionbar.args.microbar.args.microbarEnhanced = {
 		order = 10,
 		type = "group",
