@@ -37,7 +37,7 @@ function AB:GetOptions()
 					func = function()
 						if IsAddOnLoaded("ElvUI_Config") then
 							local ACD = LibStub("AceConfigDialog-3.0-ElvUI")
-							ACD:SelectGroup("ElvUI", "actionbar", "microbarEnhanced")
+							ACD:SelectGroup("ElvUI", "actionbar", "microbar")
 						end
 					end
 				}
@@ -137,24 +137,9 @@ function AB:SetSymbloColor()
 	end
 end
 
-local function onEnter(self)
-	if AB.db.microbar.symbolic then
-		S.SetModifiedBackdrop(self)
-	end
-end
-
-local function onLeave(self)
-	if AB.db.microbar.symbolic then
-		S.SetOriginalBackdrop(self)
-	end
-end
-
 local oldHandleMicroButton = AB.HandleMicroButton
 function AB:HandleMicroButton(button)
 	oldHandleMicroButton(self, button)
-
-	button:HookScript("OnEnter", onEnter)
-	button:HookScript("OnLeave", onLeave)
 
 	local text = MICRO_BUTTONS[button:GetName()]
 	button.text = button:CreateFontString(nil, "OVERLAY")
@@ -169,7 +154,7 @@ function AB:UpdateMicroPositionDimensions()
 	oldUpdateMicroPositionDimensions(self)
 
 	if not ElvUI_MicroBar.backdrop then
-		ElvUI_MicroBar:CreateBackdrop("Transparent")
+		ElvUI_MicroBar:CreateBackdrop()
 	end
 
 	ElvUI_MicroBar.backdrop:SetTemplate(AB.db.microbar.transparentBackdrop and "Transparent" or "Default")
